@@ -1,8 +1,6 @@
 let gridSize = 16;
 
 function makeGrid() {
-  // access dom container
-  const container = document.querySelector('.container');
 
   // create an 2d array of elements (divs)
   let grid = new Array(gridSize);
@@ -20,14 +18,27 @@ function makeGrid() {
       // apply classes to style specific cell
       cell.classList.add('cell');
       // align cells as grid
-      container.style.gridTemplateColumns = `repeat(${gridSize}, 0fr)`;
       grid[i][j] = cell;
       // put these divs into container
-      container.appendChild(cell);
     }
   }
 
   return grid;
+}
+
+function renderGrid() {
+  // make a grid
+  let grid = makeGrid();
+  // access container in dom
+  const container = document.querySelector('.container');
+  // style container, to have no gaps between cells
+  container.style.gridTemplateColumns = `repeat(${gridSize}, 0fr)`;
+  // put each cell into container
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      container.appendChild(grid[i][j])
+    }
+  }
 }
 
 
@@ -51,4 +62,7 @@ function resetGrid() {
 
 }
 
-makeGrid();
+renderGrid()
+// let grid = makeGrid();
+// access dom container
+// container.appendChild(cell);
