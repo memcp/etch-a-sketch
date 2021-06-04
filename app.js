@@ -47,7 +47,7 @@ function listenHoverEvents(grid) {
   // add an event listeners to each grid cell
   grid.forEach(row => {
     row.forEach(cell => {
-      cell.addEventListener('mouseenter', e => console.log(e.target))
+      cell.addEventListener('mouseenter', e => fillCell(e.target));
     })
   })
 }
@@ -56,8 +56,10 @@ function makeMenu() {
 
 }
 
-function fillCell() {
-
+function fillCell(target) {
+  // pick target cell
+  // make the background of the cell black
+  target.style.backgroundColor = 'black';
 }
 
 function setupGridRange() {
