@@ -39,11 +39,17 @@ function renderGrid() {
       container.appendChild(grid[i][j])
     }
   }
+  listenHoverEvents(grid);
 }
 
 
-function listenHoverEvents() {
-
+function listenHoverEvents(grid) {
+  // add an event listeners to each grid cell
+  grid.forEach(row => {
+    row.forEach(cell => {
+      cell.addEventListener('mouseenter', e => console.log(e.target))
+    })
+  })
 }
 
 function makeMenu() {
