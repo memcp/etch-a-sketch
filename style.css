@@ -20,6 +20,15 @@
     margin-bottom: 16px;
 }
 
+.info {
+    font-size: 14px;
+    padding-bottom: 8px;
+}
+
+.error-message {
+    color: red;
+}
+
 button  {
     color: white;
     font-weight: bold;

@@ -109,8 +109,18 @@ function listenGridSizeChange() {
   gridRangeForm.addEventListener('submit', e => e.preventDefault());
 
   gridRangeInput.addEventListener('change', e => {
-    updateGrid(e.target.value);
+    let message = updateGrid(e.target.value);
+    if (message) {
+      showError(message);
+    }
   })
+}
+
+function showError(message) {
+  const errorMessage = document.querySelector('.error-message');
+  errorMessage.textContent = message;
+
+  setTimeout(() => errorMessage.textContent = '', 3000);
 }
 
 function updateGrid(size) {
