@@ -5,9 +5,11 @@ let gridPixelSize = 800;
 let cellSize = gridPixelSize / gridSize;
 
 // darkenMode enable flag
-let darkenMode = false;
-let rgbMode = false;
-let defaultMode = false;
+const modes = {
+  'default': false,
+  'darken': false,
+  'rgb': false,
+}
 
 function random(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -68,12 +70,13 @@ function listenHoverEvents(grid) {
   grid.forEach(row => {
     row.forEach(cell => {
       cell.addEventListener('mouseenter', e => {
-        if (darkenMode) {
+        // console.log(modes)
+        if (modes.darken) {
           cell.alpha < 1 ? cell.alpha += 0.1 : cell.alpha = 1;
-          fillCell(e.target, false, darkenMode, false);
-        } else if (rgbMode) {
-          fillCell(e.target, false, false, rgbMode);
-        }else{
+          fillCell(e.target, false, modes.darken, false);
+        } else if (modes.rgb) {
+          fillCell(e.target, false, false, modes.rgb);
+        } else {
           fillCell(e.target);
         }
       });
@@ -81,13 +84,18 @@ function listenHoverEvents(grid) {
   })
 }
 
+/* Set each mode to be equal state, except one */
+function toggle(modes, state, except) {
+  for (let mode in modes) {
+    mode === except ? modes[mode] = !modes[mode] : modes[mode] = state;
+  }
+}
+
 function listenDarkenModeChange() {
   const darkenModeInput = document.querySelector('.grid-range__darken-mode');
   darkenModeInput.addEventListener('change', e => {
     e.preventDefault();
-    defaultMode = false;
-    rgbMode = false;
-    darkenMode = !darkenMode;
+    toggle(modes, false, 'darken');
   })
 }
 
@@ -96,9 +104,7 @@ function listenRgbModeChange() {
 
   rgbModeInput.addEventListener('change', e => {
     e.preventDefault();
-    defaultMode = false;
-    darkenMode = false;
-    rgbMode = !rgbMode;
+    toggle(modes, false, 'rgb');
   })
 }
 
@@ -107,9 +113,7 @@ function listenDefaultModeChange() {
 
   defaultModeInput.addEventListener('change', e => {
     e.preventDefault();
-    rgbMode = false;
-    darkenMode = false;
-    defaultMode = !defaultMode;
+    toggle(modes, false, 'default');
   })
 }
 
