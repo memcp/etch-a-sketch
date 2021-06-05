@@ -171,8 +171,10 @@ function showError(message) {
 
 function updateGrid(size) {
   const updatedGridSize = parseInt(size);
+  console.log(updatedGridSize)
 
-  if (updatedGridSize < 0) return 'Value of the grid size cannot be negative';
+  if (Number.isNaN(updatedGridSize)) return 'Grid size should be represented as positive number';
+  if (updatedGridSize <= 0) return 'Value of the grid size cannot be 0 or negative';
   if (updatedGridSize > 99) return 'Value of the grid size cannot be larger then 100';
 
   // Adjust size of the each cell to fit initial grid size in pixels
