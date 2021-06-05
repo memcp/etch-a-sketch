@@ -171,7 +171,6 @@ function showError(message) {
 
 function updateGrid(size) {
   const updatedGridSize = parseInt(size);
-  console.log(updatedGridSize)
 
   if (Number.isNaN(updatedGridSize)) return 'Grid size should be represented as positive number';
   if (updatedGridSize <= 0) return 'Value of the grid size cannot be 0 or negative';
