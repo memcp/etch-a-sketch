@@ -121,20 +121,6 @@ function listenResetEvent(grid) {
   })
 }
 
-function fillCell(target, defaultMode=true, darkenMode=false, rgbMode=false) {
-  // pick target cell
-  if (defaultMode) {
-    // make the background of the cell black immediately
-    target.style.backgroundColor = 'black';
-  } else if (darkenMode) {
-    // make background darker each time user pass through
-    target.style.backgroundColor = `rgba(0, 0, 0, ${target.alpha}`;
-  } else if (rgbMode) {
-    console.log('this')
-    target.style.backgroundColor = `rgba(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}, 1)`;
-  }
-}
-
 function listenGridSizeChange() {
   const gridRangeForm = document.querySelector('.grid-range');
   const gridRangeInput = document.querySelector('.grid-range__size');
@@ -148,6 +134,27 @@ function listenGridSizeChange() {
       showError(message);
     }
   })
+}
+
+function useListeners() {
+  listenGridSizeChange();
+  listenDarkenModeChange();
+  listenRgbModeChange();
+  listenDefaultModeChange();
+}
+
+function fillCell(target, defaultMode=true, darkenMode=false, rgbMode=false) {
+  // pick target cell
+  if (defaultMode) {
+    // make the background of the cell black immediately
+    target.style.backgroundColor = 'black';
+  } else if (darkenMode) {
+    // make background darker each time user pass through
+    target.style.backgroundColor = `rgba(0, 0, 0, ${target.alpha}`;
+  } else if (rgbMode) {
+    console.log('this')
+    target.style.backgroundColor = `rgba(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}, 1)`;
+  }
 }
 
 function showError(message) {
@@ -195,7 +202,4 @@ function resetGrid(grid) {
 }
 
 renderGrid();
-listenGridSizeChange();
-listenDarkenModeChange();
-listenRgbModeChange();
-listenDefaultModeChange();
+useListeners();
