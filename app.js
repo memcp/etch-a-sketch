@@ -1,4 +1,4 @@
-let gridSize = 4;
+let gridSize = 16;
 let gridPixelSize = 800;
 
 let cellSize = gridPixelSize / gridSize;
