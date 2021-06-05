@@ -15,6 +15,7 @@
 }
 
 .settings {
+    display: flex;
     margin-bottom: 16px;
 }
 
@@ -31,4 +32,25 @@ button  {
 button:hover {
     cursor: pointer;
     background-color: #1c7be7;
+}
+
+input, label {
+    margin-left: 16px;
+}
+
+input {
+    padding: 16px;
+    font-size: 16px;
+    border-radius: 0;
+    border: 2px solid dodgerblue;
+    width: 20px;
+}
+
+input:focus {
+    outline-color: #1c7be7;
+}
+
+h1 {
+    margin-bottom: 16px !important;
+    font-family: monospace;
 }
