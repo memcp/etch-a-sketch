@@ -1,10 +1,9 @@
-let gridSize = 4;
-let gridPixelSize = 800;
+let GRID_SIZE = 4;
+let GRID_PIXEL_SIZE = 800;
 
 // initial cell size
-let cellSize = gridPixelSize / gridSize;
+let cellSize = GRID_PIXEL_SIZE / GRID_SIZE;
 
-// darkenMode enable flag
 const modes = {
   'default': false,
   'darken': false,
@@ -16,57 +15,61 @@ function random(min, max) {
 }
 
 function makeGrid() {
+  /* Initialize grid*/
+  let grid = new Array(GRID_SIZE);
 
-  // create an 2d array of elements (divs)
-  let grid = new Array(gridSize);
-
-  // initialize array of arrays (grid);
   for (let i = 0; i < grid.length; i++) {
-    grid[i] = new Array(gridSize);
+    grid[i] = new Array(GRID_SIZE);
   }
 
-  // go through each cell of the grid
+  /*
+  *  Create elements, store them inside grid, they
+  *  need later to render cells into the DOM using renderGrid function
+  * */
   for (let i = 0; i < grid.length; i++) {
     for (let j = 0; j < grid[i].length; j++) {
-      // create a cell in memory
       const cell = document.createElement('div');
-      // apply classes to style specific cell
-      cell.classList.add('cell');
-      cell.style.width = `${cellSize}px`;
-      cell.style.height = `${cellSize}px`;
-
-      // depend on dark whether mode or not
-      cell.alpha = 0;
-
-      // align cells as grid
+      /* Adjust size of the each cell to fit initial grid size in pixels*/
+      style(cell, cellSize, cellSize, 0);
       grid[i][j] = cell;
-      // put these divs into container
     }
   }
-
   return grid;
 }
 
+function style(cell, width, height, alpha) {
+  cell.classList.add('cell');
+  cell.style.width = `${width}px`;
+  cell.style.height = `${height}px`;
+  cell.alpha = alpha;
+}
+
 function renderGrid() {
-  // make a grid
+  const gridContainer = document.querySelector('.grid');
   let grid = makeGrid();
-  // access container in dom
-  const container = document.querySelector('.grid');
-  // style container, to have no gaps between cells
-  container.style.gridTemplateColumns = `repeat(${gridSize}, 0fr)`;
-  // put each cell into container
-  for (let i = 0; i < grid.length; i++) {
-    for (let j = 0; j < grid[i].length; j++) {
-      container.appendChild(grid[i][j])
-    }
-  }
+
+  alignCellsAsGrid(gridContainer);
+  modifyDOM(gridContainer, grid);
   listenHoverEvents(grid);
   listenResetEvent(grid);
 }
 
+function alignCellsAsGrid(gridContainer) {
+  gridContainer.style.gridTemplateColumns = `repeat(${GRID_SIZE}, 0fr)`;
+}
+
+/* Use elements from grid to create representation of it in DOM*/
+function modifyDOM(gridContainer, grid) {
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      gridContainer.appendChild(grid[i][j])
+    }
+  }
+}
+
 
 function listenHoverEvents(grid) {
-  // add an event listeners to each grid cell
+  // Add an event listeners to each grid cell, choose which
   grid.forEach(row => {
     row.forEach(cell => {
       cell.addEventListener('mouseenter', e => {
@@ -163,8 +166,6 @@ function useListeners() {
   listenDefaultModeChange();
 }
 
-
-
 function showError(message) {
   const errorMessage = document.querySelector('.error-message');
   errorMessage.textContent = message;
@@ -180,10 +181,10 @@ function updateGrid(size) {
   if (updatedGridSize > 99) return 'Value of the grid size cannot be larger then 100';
 
   // change gridSize
-  gridSize = updatedGridSize;
+  GRID_SIZE = updatedGridSize;
 
   // change cell size
-  cellSize = gridPixelSize / gridSize;
+  cellSize = GRID_PIXEL_SIZE / GRID_SIZE;
 
   // delete previous grid;
   deleteGrid();
