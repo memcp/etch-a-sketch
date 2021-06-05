@@ -1,5 +1,5 @@
 let gridSize = 16;
-let gridPixelSize = 960;
+let gridPixelSize = 800;
 let cellSize = gridPixelSize / gridSize;
 
 function makeGrid() {
@@ -35,7 +35,7 @@ function renderGrid() {
   // make a grid
   let grid = makeGrid();
   // access container in dom
-  const container = document.querySelector('.container');
+  const container = document.querySelector('.grid');
   // style container, to have no gaps between cells
   container.style.gridTemplateColumns = `repeat(${gridSize}, 0fr)`;
   // put each cell into container
