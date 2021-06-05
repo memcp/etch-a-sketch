@@ -1,5 +1,7 @@
-let gridSize = 16;
+let gridSize = 4;
 let gridPixelSize = 800;
+
+// initial cell size
 let cellSize = gridPixelSize / gridSize;
 
 function makeGrid() {
@@ -76,8 +78,44 @@ function fillCell(target, color) {
   target.style.backgroundColor = color;
 }
 
-function setupGridRange() {
+function listenGridSizeChange() {
+  const gridRangeForm = document.querySelector('.grid-range');
+  const gridRangeInput = document.querySelector('.grid-range__size');
 
+  // prevent default refresh for form
+  gridRangeForm.addEventListener('submit', e => e.preventDefault());
+
+  gridRangeInput.addEventListener('change', e => {
+    console.log('changed')
+    updateGrid(e.target.value)
+  })
+}
+
+function updateGrid(size) {
+  // access value of input inside DOM
+  const updatedGridSize = parseInt(size);
+  // check if it value in range from 0 to 100
+  if (updatedGridSize < 0) return 'Value of the grid size cannot be negative';
+  if (updatedGridSize > 100) return 'Value of the grid size cannot be larger then 100';
+
+  // change gridSize
+  gridSize = updatedGridSize;
+
+  // change cell size
+  cellSize = gridPixelSize / gridSize;
+
+  // delete previous grid;
+  deleteGrid();
+
+  // call makeGrid to make grid with new size
+  let grid = makeGrid();
+  // call renderGrid to update grid in DOM
+  renderGrid(grid);
+}
+
+function deleteGrid() {
+  const grid = document.querySelector('.grid');
+  grid.innerHTML = '';
 }
 
 function resetGrid(grid) {
@@ -89,7 +127,5 @@ function resetGrid(grid) {
   })
 }
 
-renderGrid()
-// let grid = makeGrid();
-// access dom container
-// container.appendChild(cell);
+renderGrid();
+listenGridSizeChange();
