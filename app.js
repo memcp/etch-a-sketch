@@ -1,4 +1,6 @@
 let gridSize = 16;
+let gridPixelSize = 1140;
+let cellSize = gridPixelSize / gridSize;
 
 function makeGrid() {
 
@@ -17,6 +19,9 @@ function makeGrid() {
       const cell = document.createElement('div');
       // apply classes to style specific cell
       cell.classList.add('cell');
+      cell.style.width = `${cellSize}px`;
+      cell.style.height = `${cellSize}px`;
+
       // align cells as grid
       grid[i][j] = cell;
       // put these divs into container
@@ -66,8 +71,13 @@ function setupGridRange() {
 
 }
 
-function resetGrid() {
-
+function resetGrid(grid) {
+  // make background of each cell to be transparent
+  grid.forEach(row => {
+    row.forEach(cell => {
+      cell.style.backgroundColor = 'transparent';
+    })
+  })
 }
 
 renderGrid()
