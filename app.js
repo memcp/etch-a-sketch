@@ -175,7 +175,7 @@ function updateGrid(size) {
   if (updatedGridSize < 0) return 'Value of the grid size cannot be negative';
   if (updatedGridSize > 99) return 'Value of the grid size cannot be larger then 100';
 
-  /* Adjust size of the each cell to fit initial grid size in pixels */
+  // Adjust size of the each cell to fit initial grid size in pixels
   gridSize = updatedGridSize;
   cellSize = gridPixelSize / gridSize;
 
