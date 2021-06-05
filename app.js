@@ -14,7 +14,7 @@ function random(min, max) {
 }
 
 function makeGrid() {
-  /* Initialize grid */
+  // Initialize grid
   let grid = new Array(gridSize);
 
   for (let i = 0; i < grid.length; i++) {
