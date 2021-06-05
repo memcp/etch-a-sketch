@@ -14,7 +14,7 @@ function random(min, max) {
 }
 
 function makeGrid() {
-  /* Initialize grid*/
+  /* Initialize grid */
   let grid = new Array(gridSize);
 
   for (let i = 0; i < grid.length; i++) {
@@ -56,7 +56,7 @@ function alignCellsAsGrid(gridContainer) {
   gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, 0fr)`;
 }
 
-/* Use elements from grid to create representation of it in DOM*/
+/* Use elements from grid to create representation of it in DOM */
 function modifyDOM(gridContainer, grid) {
   for (let i = 0; i < grid.length; i++) {
     for (let j = 0; j < grid[i].length; j++) {
