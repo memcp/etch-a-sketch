@@ -70,18 +70,34 @@ function listenHoverEvents(grid) {
   grid.forEach(row => {
     row.forEach(cell => {
       cell.addEventListener('mouseenter', e => {
-        // console.log(modes)
-        if (modes.darken) {
-          cell.alpha < 1 ? cell.alpha += 0.1 : cell.alpha = 1;
-          fillCell(e.target, false, modes.darken, false);
-        } else if (modes.rgb) {
-          fillCell(e.target, false, false, modes.rgb);
-        } else {
-          fillCell(e.target);
-        }
+        applyModes(e.target, cell);
       });
     })
   })
+}
+
+/* Apply color modes to specific cell, when it hovered */
+function applyModes(target, cell) {
+  if (modes.darken) {
+    applyDarkenMode(target, cell);
+  } else if (modes.rgb) {
+    applyRgbMode(target);
+  } else {
+    applyDefaultMode(target);
+  }
+}
+
+function applyDarkenMode(target, cell) {
+  cell.alpha < 1 ? cell.alpha += 0.1 : cell.alpha = 1;
+  target.style.backgroundColor = `rgba(0, 0, 0, ${target.alpha}`;
+}
+
+function applyDefaultMode(target) {
+  target.style.backgroundColor = 'black';
+}
+
+function applyRgbMode(target) {
+  target.style.backgroundColor = `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}`
 }
 
 /* Set each mode to be equal state, except one */
@@ -147,19 +163,7 @@ function useListeners() {
   listenDefaultModeChange();
 }
 
-function fillCell(target, defaultMode=true, darkenMode=false, rgbMode=false) {
-  // pick target cell
-  if (defaultMode) {
-    // make the background of the cell black immediately
-    target.style.backgroundColor = 'black';
-  } else if (darkenMode) {
-    // make background darker each time user pass through
-    target.style.backgroundColor = `rgba(0, 0, 0, ${target.alpha}`;
-  } else if (rgbMode) {
-    console.log('this')
-    target.style.backgroundColor = `rgba(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}, 1)`;
-  }
-}
+
 
 function showError(message) {
   const errorMessage = document.querySelector('.error-message');
