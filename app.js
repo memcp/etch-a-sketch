@@ -189,7 +189,7 @@ function resetGrid(grid) {
   grid.forEach(row => {
     row.forEach(cell => {
       cell.alpha = 0;
-      fillCell(cell, 'transparent')
+      cell.style.backgroundColor = 'transparent';
     })
   })
 }
