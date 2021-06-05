@@ -1,8 +1,7 @@
-let GRID_SIZE = 4;
-let GRID_PIXEL_SIZE = 800;
+let gridSize = 4;
+let gridPixelSize = 800;
 
-// initial cell size
-let cellSize = GRID_PIXEL_SIZE / GRID_SIZE;
+let cellSize = gridPixelSize / gridSize;
 
 const modes = {
   'default': false,
@@ -16,10 +15,10 @@ function random(min, max) {
 
 function makeGrid() {
   /* Initialize grid*/
-  let grid = new Array(GRID_SIZE);
+  let grid = new Array(gridSize);
 
   for (let i = 0; i < grid.length; i++) {
-    grid[i] = new Array(GRID_SIZE);
+    grid[i] = new Array(gridSize);
   }
 
   /*
@@ -29,7 +28,6 @@ function makeGrid() {
   for (let i = 0; i < grid.length; i++) {
     for (let j = 0; j < grid[i].length; j++) {
       const cell = document.createElement('div');
-      /* Adjust size of the each cell to fit initial grid size in pixels*/
       style(cell, cellSize, cellSize, 0);
       grid[i][j] = cell;
     }
@@ -55,7 +53,7 @@ function renderGrid() {
 }
 
 function alignCellsAsGrid(gridContainer) {
-  gridContainer.style.gridTemplateColumns = `repeat(${GRID_SIZE}, 0fr)`;
+  gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, 0fr)`;
 }
 
 /* Use elements from grid to create representation of it in DOM*/
@@ -148,7 +146,6 @@ function listenGridSizeChange() {
   const gridRangeForm = document.querySelector('.grid-range');
   const gridRangeInput = document.querySelector('.grid-range__size');
 
-  // prevent default refresh for form
   gridRangeForm.addEventListener('submit', e => e.preventDefault());
 
   gridRangeInput.addEventListener('change', e => {
@@ -174,24 +171,17 @@ function showError(message) {
 }
 
 function updateGrid(size) {
-  // access value of input inside DOM
   const updatedGridSize = parseInt(size);
-  // check if it value in range from 0 to 100
+
   if (updatedGridSize < 0) return 'Value of the grid size cannot be negative';
   if (updatedGridSize > 99) return 'Value of the grid size cannot be larger then 100';
 
-  // change gridSize
-  GRID_SIZE = updatedGridSize;
+  /* Adjust size of the each cell to fit initial grid size in pixels */
+  gridSize = updatedGridSize;
+  cellSize = gridPixelSize / gridSize;
 
-  // change cell size
-  cellSize = GRID_PIXEL_SIZE / GRID_SIZE;
-
-  // delete previous grid;
   deleteGrid();
-
-  // call makeGrid to make grid with new size
   let grid = makeGrid();
-  // call renderGrid to update grid in DOM
   renderGrid(grid);
 }
 
@@ -201,7 +191,6 @@ function deleteGrid() {
 }
 
 function resetGrid(grid) {
-  // make background of each cell to be transparent
   grid.forEach(row => {
     row.forEach(cell => {
       cell.alpha = 0;
