@@ -45,7 +45,7 @@ function style(cell, width, height, alpha) {
 }
 
 function renderGrid() {
-  const gridContainer = document.querySelector('.grid');
+  const gridContainer = document.querySelector('.grid-container');
   let grid = makeGrid();
 
   alignCellsAsGrid(gridContainer);
@@ -111,7 +111,7 @@ function toggle(modes, state, except) {
 }
 
 function listenDarkenModeChange() {
-  const darkenModeInput = document.querySelector('.grid-range__darken-mode');
+  const darkenModeInput = document.querySelector('.grid__darken-mode');
   darkenModeInput.addEventListener('change', e => {
     e.preventDefault();
     toggle(modes, false, 'darken');
@@ -119,7 +119,7 @@ function listenDarkenModeChange() {
 }
 
 function listenRgbModeChange() {
-  const rgbModeInput = document.querySelector('.grid-range__rgb-mode');
+  const rgbModeInput = document.querySelector('.grid__rgb-mode');
 
   rgbModeInput.addEventListener('change', e => {
     e.preventDefault();
@@ -128,7 +128,7 @@ function listenRgbModeChange() {
 }
 
 function listenDefaultModeChange() {
-  const defaultModeInput = document.querySelector('.grid-range__default-mode');
+  const defaultModeInput = document.querySelector('.grid__default-mode');
 
   defaultModeInput.addEventListener('change', e => {
     e.preventDefault();
@@ -146,7 +146,7 @@ function listenResetEvent(grid) {
 
 function listenGridSizeChange() {
   const gridRangeForm = document.querySelector('.grid-range');
-  const gridRangeInput = document.querySelector('.grid-range__size');
+  const gridRangeInput = document.querySelector('.grid__size');
 
   // prevent default refresh for form
   gridRangeForm.addEventListener('submit', e => e.preventDefault());
@@ -196,7 +196,7 @@ function updateGrid(size) {
 }
 
 function deleteGrid() {
-  const grid = document.querySelector('.grid');
+  const grid = document.querySelector('.grid-container');
   grid.innerHTML = '';
 }
 
