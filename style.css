@@ -66,5 +66,6 @@ input[type="radio"] {
 
 h1 {
     margin-bottom: 16px !important;
+    margin-top: 16px !important;
     font-family: monospace;
 }
