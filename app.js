@@ -65,7 +65,6 @@ function modifyDOM(gridContainer, grid) {
   }
 }
 
-
 function listenHoverEvents(grid) {
   // Add an event listeners to each grid cell, choose which
   grid.forEach(row => {
