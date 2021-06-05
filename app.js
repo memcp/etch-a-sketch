@@ -1,5 +1,5 @@
 let gridSize = 16;
-let gridPixelSize = 1140;
+let gridPixelSize = 960;
 let cellSize = gridPixelSize / gridSize;
 
 function makeGrid() {
@@ -45,6 +45,7 @@ function renderGrid() {
     }
   }
   listenHoverEvents(grid);
+  listenResetEvent(grid);
 }
 
 
@@ -52,8 +53,16 @@ function listenHoverEvents(grid) {
   // add an event listeners to each grid cell
   grid.forEach(row => {
     row.forEach(cell => {
-      cell.addEventListener('mouseenter', e => fillCell(e.target));
+      cell.addEventListener('mouseenter', e => fillCell(e.target, 'black'));
     })
+  })
+}
+
+function listenResetEvent(grid) {
+  const resetButton = document.querySelector('.reset-button');
+  resetButton.addEventListener('click', e => {
+    e.preventDefault();
+    resetGrid(grid)
   })
 }
 
@@ -61,10 +70,10 @@ function makeMenu() {
 
 }
 
-function fillCell(target) {
+function fillCell(target, color) {
   // pick target cell
   // make the background of the cell black
-  target.style.backgroundColor = 'black';
+  target.style.backgroundColor = color;
 }
 
 function setupGridRange() {
@@ -75,7 +84,7 @@ function resetGrid(grid) {
   // make background of each cell to be transparent
   grid.forEach(row => {
     row.forEach(cell => {
-      cell.style.backgroundColor = 'transparent';
+      fillCell(cell, 'transparent')
     })
   })
 }
