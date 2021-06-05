@@ -101,7 +101,7 @@ function applyRgbMode(target) {
   target.style.backgroundColor = `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}`
 }
 
-/* Set each mode to be equal state, except one */
+/* Set each mode to be equal state, except one which reversed */
 function toggle(modes, state, except) {
   for (let mode in modes) {
     mode === except ? modes[mode] = !modes[mode] : modes[mode] = state;
